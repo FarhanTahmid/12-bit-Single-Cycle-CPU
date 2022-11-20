@@ -22,5 +22,11 @@ for ls1 in datas:
             continue
         elif i==0:
             print(opCodeDict[ls1[i]])
+        elif i==2:
+            try:
+                 if(int(ls1[i])<=9 or int(ls1[i])>=0):
+                    print(f'{int(ls1[i]):04b}')
+            except:
+                print(register_code_Dict[ls1[i]])
         else:
             print(register_code_Dict[ls1[i]])
