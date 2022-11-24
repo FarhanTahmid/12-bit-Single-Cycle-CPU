@@ -17,16 +17,42 @@ with open("input_file.txt",'r') as data_file:
         data=re.split(', |\n| ',line)
         datas.append(data)
 for ls1 in datas:
-    for i in range (len(ls1)):
-        if(ls1[i]==''):
-            continue
-        elif i==0:
-            print(opCodeDict[ls1[i]])
-        elif i==2:
-            try:
-                 if(int(ls1[i])<=9 or int(ls1[i])>=0):
-                    print(f'{int(ls1[i]):04b}')
-            except:
-                print(register_code_Dict[ls1[i]])
+    if(ls1[-1]==""):
+        ls1.pop()
+
+#Open output file
+# Append-adds at last
+outputFile = open("outputfile.txt", "a")
+
+
+
+for ls1 in datas:
+    try:
+        try:
+            if(int(ls1[-1])>15 or int(ls1[-1])<0):
+                outputFile.write("Cant store a number bigger than 15!\n")
+                continue
+        except:
+            pass
+        if(len(ls1)>3):
+            outputFile.write("Can not execute command, Not enough registers assigned!\n")
         else:
-            print(register_code_Dict[ls1[i]])
+            for i in range (len(ls1)):
+                if(ls1[i]==''):
+                    continue
+                elif(ls1[i]=='L'):
+                    outputFile.write(ls1[i]+" ")
+                elif i==0:
+                    outputFile.write(opCodeDict[ls1[i]]+" ")
+                elif i==2:
+                    try:
+                        if(int(ls1[i])<=9 or int(ls1[i])>=0):
+                            outputFile.write(f'{int(ls1[i]):04b}'+"")
+                    except:
+                        outputFile.write(register_code_Dict[ls1[i]]+" ")
+                else:
+                    outputFile.write(register_code_Dict[ls1[i]]+" ")
+        outputFile.write('\n')
+    except:
+        outputFile.write("Sorry An Unexpected error occured!")    
+outputFile.close()

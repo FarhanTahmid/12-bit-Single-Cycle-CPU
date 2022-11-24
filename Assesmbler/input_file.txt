@@ -1,2 +1,29 @@
 Add $s1, $s2
-Addi $s1, 5
+Addi $s1, 1
+Sub $s1, $s2
+And $s1, $s2
+Or $s1, $s2
+Sll $s1, $s2
+Srl $s1, $s2
+Beq $s1, L
+Bne $s1, L
+Slt $s1, $s2
+Slti $s1, 5
+In $s1
+Out $s1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
