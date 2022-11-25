@@ -46,6 +46,22 @@ for ls1 in datas:
                     continue
                 elif(ls1[i]=='L'):
                     outputFile.write(ls1[i]+" ")
+                elif(ls1[i]=='Lw' or ls1[i]=='Sw'):
+                    outputFile.write(binToHexa(opCodeDict[ls1[i]])+" ")
+                    try:
+                        outputFile.write(
+                            binToHexa(register_code_Dict[ls1[i+1]])+" ")
+                        if ('(' in ls1[i+2] or ')' in ls1[i+2]):
+                            if (int(ls1[i+2][0]) <= 9 or int(ls1[i+2][0]) >= 0):
+                                number = f'{int(ls1[i+2][0]):04b}'
+                                outputFile.write(binToHexa(number))
+                            else:
+                                outputFile.write(ls1[i+2][0])
+                            register=ls1[i+2][2:-1]
+                            outputFile.write("("+binToHexa(register_code_Dict[register])+") ")
+                    except:
+                        outputFile.write("Unexpected Error occured!")
+                    break
                 elif i==0:
                     outputFile.write(binToHexa(opCodeDict[ls1[i]])+" ")
                 elif i==2:

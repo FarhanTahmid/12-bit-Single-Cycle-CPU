@@ -10,4 +10,5 @@ Bne $s1, L
 Slt $s1, $s2
 Slti $s1, 5
 In $s1
+Lw $s1, 0($s1)
 Out $s1
