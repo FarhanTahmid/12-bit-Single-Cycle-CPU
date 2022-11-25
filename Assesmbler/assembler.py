@@ -24,6 +24,10 @@ for ls1 in datas:
 # Append-adds at last
 outputFile = open("outputfile.txt", "a")
 
+def binToHexa(binaryNumber):
+    decimalNum=int(binaryNumber,2)
+    hexaDecimalNum=hex(decimalNum)
+    return(hexaDecimalNum)
 
 
 for ls1 in datas:
@@ -43,16 +47,17 @@ for ls1 in datas:
                 elif(ls1[i]=='L'):
                     outputFile.write(ls1[i]+" ")
                 elif i==0:
-                    outputFile.write(opCodeDict[ls1[i]]+" ")
+                    outputFile.write(binToHexa(opCodeDict[ls1[i]])+" ")
                 elif i==2:
                     try:
                         if(int(ls1[i])<=9 or int(ls1[i])>=0):
-                            outputFile.write(f'{int(ls1[i]):04b}'+"")
+                            number=f'{int(ls1[i]):04b}'
+                            outputFile.write(binToHexa(number)+" ")
                     except:
-                        outputFile.write(register_code_Dict[ls1[i]]+" ")
+                        outputFile.write(binToHexa(register_code_Dict[ls1[i]])+" ")
                 else:
-                    outputFile.write(register_code_Dict[ls1[i]]+" ")
+                    outputFile.write(binToHexa(register_code_Dict[ls1[i]])+" ")
         outputFile.write('\n')
     except:
-        outputFile.write("Sorry An Unexpected error occured!")    
+        outputFile.write("Sorry An Unexpected Instructuion found which is not in our instruction sets!")    
 outputFile.close()
