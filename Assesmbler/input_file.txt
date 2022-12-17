@@ -5,10 +5,11 @@ And $s1, $s2
 Or $s1, $s2
 Sll $s1, $s2
 Srl $s1, $s2
-Beq $s1, L
-Bne $s1, L
+Beq $s1, 2
+Bne $s1, 12
 Slt $s1, $s2
 Slti $s1, 5
 In $s1
-Lw $s1, 0($s1)
+Lw $s1, 15
+Sw $s1, 5
 Out $s1

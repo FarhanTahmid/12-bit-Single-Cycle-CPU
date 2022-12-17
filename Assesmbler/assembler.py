@@ -33,7 +33,7 @@ def binToHexa(binaryNumber):
 for ls1 in datas:
     try:
         try:
-            if(int(ls1[-1])>15 or int(ls1[-1])<0):
+            if((int(ls1[-1])>15 or int(ls1[-1])<0) and (ls1[i]=='Lw' or ls1[i]=='Sw')):
                 outputFile.write("Cant store a number bigger than 15!\n")
                 continue
         except:
@@ -44,24 +44,17 @@ for ls1 in datas:
             for i in range (len(ls1)):
                 if(ls1[i]==''):
                     continue
-                elif(ls1[i]=='L'):
-                    outputFile.write(ls1[i]+" ")
-                elif(ls1[i]=='Lw' or ls1[i]=='Sw'):
+                elif (ls1[i] == 'Lw' or ls1[i] == 'Sw'):
                     outputFile.write(binToHexa(opCodeDict[ls1[i]])+" ")
-                    try:
-                        outputFile.write(
-                            binToHexa(register_code_Dict[ls1[i+1]])+" ")
-                        if ('(' in ls1[i+2] or ')' in ls1[i+2]):
-                            if (int(ls1[i+2][0]) <= 9 or int(ls1[i+2][0]) >= 0):
-                                number = f'{int(ls1[i+2][0]):04b}'
-                                outputFile.write(binToHexa(number))
-                            else:
-                                outputFile.write(ls1[i+2][0])
-                            register=ls1[i+2][2:-1]
-                            outputFile.write("("+binToHexa(register_code_Dict[register])+") ")
-                    except:
-                        outputFile.write("Unexpected Error occured!")
+                    outputFile.write(
+                        binToHexa(register_code_Dict[ls1[i+1]])+" ")
+                    if (int(ls1[i+2]) <= 15):
+                        number = f'{int(ls1[i+2]):04b}'
+                        outputFile.write(binToHexa(number))
+                    else:
+                        outputFile.write("Insufficient bits!")        
                     break
+                    
                 elif i==0:
                     outputFile.write(binToHexa(opCodeDict[ls1[i]])+" ")
                 elif i==2:
@@ -75,5 +68,5 @@ for ls1 in datas:
                     outputFile.write(binToHexa(register_code_Dict[ls1[i]])+" ")
         outputFile.write('\n')
     except:
-        outputFile.write("Sorry An Unexpected Instructuion found which is not in our instruction sets!")    
+         outputFile.write("Sorry An Unexpected Instructuion found which is not in our instruction sets!")    
 outputFile.close()
